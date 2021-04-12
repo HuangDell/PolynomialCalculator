@@ -39,6 +39,7 @@ class Judge
         }
         return poly;
     }
+
     string getName()
     {
         return poly_name;
@@ -53,7 +54,6 @@ class Judge
             if(!isalnum(ch))
                 return false;
         return true;
-
     }
 
 };

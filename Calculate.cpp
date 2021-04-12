@@ -1,4 +1,5 @@
 //在这里定义各种多项计算的操作符
+#include <cmath>
 typedef Polynomial py;
 py ans;
 py &operator+(py&py1, py& py2)
@@ -44,4 +45,28 @@ bool operator==(py &py1,py &py2)
     if(py1.to_string()==py2.to_string())
     return true;
     return false;
+}
+py &evaluation(py &py1,double x)//求值
+{
+    vector<double> an;
+    double num;
+    auto temp=py1.getPoly();
+    for (int i=1;i<temp.size();i+=2)
+        num=temp[i-1]*pow(x,temp[i]);
+    an.push_back(num);
+    an.push_back(0);
+    ans=py(an,"ans");
+    return ans;
+}
+py &diff(py &py1)
+{
+    vector<double> an;
+    auto temp=py1.getPoly();
+    for (int i=1;i<temp.size();i++)
+    {
+        an.push_back(temp[i-1]*temp[i]);
+        an.push_back(temp[i]-1);
+    }
+    ans=py(an,"ans");
+    return ans;
 }
