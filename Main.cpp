@@ -8,7 +8,7 @@ int main(void)//main函数启动程序，实现交互。
 {
     string choose;
     Menu menu;
-    while(true)
+    while(true)//主循环
     {
         start:
         system("cls");
@@ -36,8 +36,6 @@ int main(void)//main函数启动程序，实现交互。
             break;
             case 9:
             return 0;
-            default:
-            goto start;
         }
     }
 }

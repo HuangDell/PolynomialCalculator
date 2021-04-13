@@ -20,15 +20,15 @@ class Menu//Menu类只用于与用户进行交互，不负责具体计算的实现
     {
         vector<double> poly;
         judge.clear();
-        poly = judge.polynomial(input);
+        poly = judge.polynomial(input);//判断是否合法
         if (!poly.empty())
         {
             Polynomial polynomial(poly, judge.getName());
-            data.addPoly(polynomial);
+            data.addPoly(polynomial);//添加到临时存储中
             printf("你输入的多项式是：%s=", judge.getName().c_str());
             cout << polynomial.to_string() << endl;
         }
-        else
+        else//输入不合法
         {
             printf("输入格式有误，请重新输入！\n");
             cin>>input;
@@ -47,7 +47,7 @@ class Menu//Menu类只用于与用户进行交互，不负责具体计算的实现
         printf("在任意界面输入quit来返回上一级\n");
     }
 
-    bool isLegal(string choose)
+    bool isLegal(string choose)//判断是否合法
     {
         if (!isdigit(choose[0]) || choose.size() > 1)
             return false;
@@ -60,7 +60,8 @@ class Menu//Menu类只用于与用户进行交互，不负责具体计算的实现
         printf("请输入一个多项式(格式:名称(可选)=(系数,指数))(注意我们并不要求你按照降序或者升序输入):\n");
         cin>> input;
         quit(input);
-        while (!createPoly());
+        while (!createPoly())
+        quit(input);//如果不合法就一直循环，或者用户输入了quit
         PressAny();
     }
     void Mode2()
@@ -68,7 +69,7 @@ class Menu//Menu类只用于与用户进行交互，不负责具体计算的实现
         system("cls");
         auto data_poly=data.getData();
         printf("目前储存的多项式有：\n");
-        for (auto temp:data_poly)
+        for (auto temp:data_poly)//从数据库中获得多项式
             printf("%s=%s\n",temp.getName().c_str(),temp.to_string().c_str());
         PressAny();
     }
@@ -111,7 +112,7 @@ class Menu//Menu类只用于与用户进行交互，不负责具体计算的实现
         {
             printf("请输入x的值：");
         Again:
-            if (!(cin >> x))
+            if (!(cin >> x))//判断x是否合法
             {
                 cout << "请重新输入:";
                 cin.clear();
@@ -119,11 +120,11 @@ class Menu//Menu类只用于与用户进行交互，不负责具体计算的实现
                 goto Again;
             }
         
-            ans = evaluation(py, x);
+            ans = evaluation(py, x);//进行求值
         }
         else
-            ans = diff(py);
-        data.addPoly(ans);
+            ans = diff(py);//进行求导
+        data.addPoly(ans);//将结果添加到临时库中
         printf("结果：ans=%s\n", ans.to_string().c_str());
         PressAny();
     }
@@ -166,7 +167,7 @@ class Menu//Menu类只用于与用户进行交互，不负责具体计算的实现
             }
         }
         if(mode==1)
-        ans=py[0]+py[1];
+        ans=py[0]+py[1];//使用运算符重载
         else if (mode==2)
         ans=py[0]-py[1];
         else if(mode==3)

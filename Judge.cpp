@@ -1,4 +1,4 @@
-#include <regex>
+#include <regex>//使用正则表达式
 #include <cctype>
 #include <string>
 #include <vector>
@@ -28,7 +28,7 @@ class Judge
         {
             sregex_iterator iter(input.begin(), input.end(), str_draw);//使用迭代器获取多项式的系数和指数
             sregex_iterator end;
-            while(iter!=end)
+            while(iter!=end)//提取所有满足正则表达式的字符串
             {
                 for (int i=1;i<iter->size();i++)
                     poly.push_back(stod((*iter)[i]));
@@ -40,20 +40,20 @@ class Judge
         return poly;
     }
 
-    string getName()
-    {
-        return poly_name;
-    }
-    void clear()
-    {
-        poly_name="None";
-    }
-    bool isName(string input)
+    bool isName(string input)//判断输入的是否为多项式名称
     {
         for (auto ch:input)
             if(!isalnum(ch))
                 return false;
         return true;
+    }
+    string getName()//返回多项式名称
+    {
+        return poly_name;
+    }
+    void clear()//将存储的名称清理
+    {
+        poly_name="None";
     }
 
 };
