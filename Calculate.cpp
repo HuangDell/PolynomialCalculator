@@ -51,7 +51,7 @@ py &evaluation(py &py1,double x)//求值
     double num;
     auto temp=py1.getPoly();
     for (int i=1;i<temp.size();i+=2)
-        num=temp[i-1]*pow(x,temp[i]);
+        num+=temp[i-1]*pow(x,temp[i]);
     an.push_back(num);
     an.push_back(0);//求值获得的是常数，常数的未知数系数为0
     ans=py(an,"ans");
@@ -60,8 +60,8 @@ py &evaluation(py &py1,double x)//求值
 py &diff(py &py1)//求导数
 {
     vector<double> an;
-    auto temp=py1.getPoly();
-    for (int i=1;i<temp.size();i++)
+    auto &temp = py1.getPoly();
+    for (int i=1;i<temp.size();i+=2)
     {
         an.push_back(temp[i-1]*temp[i]);
         an.push_back(temp[i]-1);
